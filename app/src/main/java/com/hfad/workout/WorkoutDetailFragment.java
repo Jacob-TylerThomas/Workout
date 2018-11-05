@@ -8,6 +8,17 @@ import android.widget.ImageView;
 import android.widget.TextView;
 public class WorkoutDetailFragment extends Fragment {
     private long workoutId;
+//    @Override
+//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+//                             Bundle savedInstanceState) {
+//        return inflater.inflate(R.layout.fragment_workout_detail, container, false);
+//    }
+public void onCreate(Bundle savedInstanceState){
+    super.onCreate(savedInstanceState);
+    if (savedInstanceState != null) {
+        workoutId = savedInstanceState.getLong("workoutId");
+    }
+}
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -21,6 +32,8 @@ public class WorkoutDetailFragment extends Fragment {
             TextView title = (TextView) view.findViewById(R.id.textTitle);
             TextView paragragh_header = view.findViewById(R.id.paragraph_header);
             paragragh_header.setText(R.string.Header_text);
+            TextView more_information = view.findViewById(R.id.moreInformation);
+            more_information.setText(R.string.More_information_text);
             Workout workout = Workout.workouts[(int) workoutId];
             title.setText(workout.getName());
             TextView description = (TextView) view.findViewById(R.id.textDescription);
@@ -32,6 +45,11 @@ public class WorkoutDetailFragment extends Fragment {
             ImageView image=view.findViewById(R.id.building_picture);
             image.setImageResource(workout.getImage());
         }
+
+    }
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        savedInstanceState.putLong("workoutId", workoutId);
     }
     public void setWorkout(long id) {
         this.workoutId = id;

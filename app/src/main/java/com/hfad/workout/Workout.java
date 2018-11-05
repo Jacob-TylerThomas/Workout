@@ -28,7 +28,18 @@ public class Workout {
                     R.drawable.cis,
                     R.string.Dobo_caption,
                     R.string.Dobo_link
-                    ),
+                     ),
+            new Workout(R.string.Cameron,
+                  R.string.Cameron_text,
+                  R.drawable.cameron,
+                  R.string.Cameron_caption,
+                  R.string.Cameron_link),
+
+            new Workout(R.string.Deloach,
+                    R.string.Deloach_text,
+                    R.drawable.deloach,
+                    R.string.Deloach_caption,
+                    R.string.Deloach_link),
     };
     //Each Workout has a name and description
     private Workout(Integer name, Integer description, Integer image, Integer caption, Integer link) {
