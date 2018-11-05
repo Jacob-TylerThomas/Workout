@@ -1,29 +1,63 @@
 package com.hfad.workout;
 public class Workout {
-    private String name;
-    private String description;
+    private Integer name;
+    private Integer description;
+    private Integer image;
+    private Integer caption;
+    private Integer link;
+
+    private String convertedName;
+    private String convertedName2;
+    private Integer test;
+
     public static final Workout[] workouts = {
-            new Workout("The Limb Loosener",
-                    "5 Handstand push-ups\n10 1-legged squats\n15 Pull-ups"),
-            new Workout("Core Agony",
-                    "100 Pull-ups\n100 Push-ups\n100 Sit-ups\n100 Squats"),
-            new Workout("The Wimp Special",
-                    "5 Pull-ups\n10 Push-ups\n15 Squats"),
-            new Workout("Strength and Length",
-                    "500 meter run\n21 x 1.5 pood kettleball swing\n21 x pull-ups")
+            new Workout(R.string.CIS,
+                    R.string.CIS_text,
+                    R.drawable.cis,
+                    R.string.CIS_caption,
+                    R.string.CIS_link
+                    ),
+            new Workout(R.string.Bear,
+                    R.string.Bear_text,
+                    R.drawable.cis,
+                    R.string.Bear_caption,
+                    R.string.Bear_link
+                    ),
+            new Workout(R.string.Dobo,
+                    R.string.Dobo_text,
+                    R.drawable.cis,
+                    R.string.Dobo_caption,
+                    R.string.Dobo_link
+                    ),
     };
     //Each Workout has a name and description
-    private Workout(String name, String description) {
+    private Workout(Integer name, Integer description, Integer image, Integer caption, Integer link) {
         this.name = name;
         this.description = description;
+        this.image=image;
+        this.caption=caption;
+        this.link=link;
+
     }
-    public String getDescription() {
+    public Integer getDescription() {
+
         return description;
     }
-    public String getName() {
+    public Integer getName() {
         return name;
     }
-    public String toString() {
-        return this.name;
+    public Integer getImage() {
+        return image;
     }
+    public Integer getCaption() {
+        return caption;
+    }
+    public Integer getLink() {
+        return link;
+    }
+
+//    public String toString() {
+//        convertedName=Integer.toString(this.name);
+//        return this.convertedName;
+//    }
 }
