@@ -1,7 +1,7 @@
 package com.hfad.workout;
-import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
-import android.support.v7.widget.Toolbar;
+import android.support.v7.app.AppCompatActivity;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_WORKOUT_ID = "id";

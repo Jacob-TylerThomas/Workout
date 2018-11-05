@@ -67,8 +67,5 @@ public class Workout {
         return link;
     }
 
-//    public String toString() {
-//        convertedName=Integer.toString(this.name);
-//        return this.convertedName;
-//    }
+
 }
