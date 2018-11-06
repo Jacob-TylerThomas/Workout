@@ -17,11 +17,11 @@ public class WorkoutListFragment extends ListFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Integer[] names = new Integer[Workout.workouts.length];
+        String[] names = new String[Workout.workouts.length];
         for (int i = 0; i < names.length; i++) {
-            names[i] = Workout.workouts[i].getName();
+            names[i] = getContext().getResources().getString(Workout.workouts[i].getName());
         }
-        ArrayAdapter<Integer> adapter = new ArrayAdapter<>(
+        ArrayAdapter<String> adapter = new ArrayAdapter<>(
                 inflater.getContext(), android.R.layout.simple_list_item_1,
                 names);
         setListAdapter(adapter);
