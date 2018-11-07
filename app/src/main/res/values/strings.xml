@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">SeahawkTours</string>
     <string name="details_button">Show details</string>
+    <string name="info_button">About</string>
     <string name="workout_title">Title</string>
     <string name="workout_description">Description</string>
 

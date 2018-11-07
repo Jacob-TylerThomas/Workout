@@ -8,16 +8,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import java.util.regex.Pattern;
 
-public class WorkoutDetailFragment extends Fragment {
+public class WorkoutDetailFragment extends Fragment  {
     private long workoutId;
 
 public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     if (savedInstanceState != null) {
         workoutId = savedInstanceState.getLong("workoutId");
+
     }
 }
     @Override
@@ -50,6 +50,10 @@ public void onCreate(Bundle savedInstanceState){
             Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
             buildingLink.setText(R.string.More_information_text);
             Linkify.addLinks(buildingLink, pattern, getContext().getResources().getString(workout.getLink()));
+
+            //this uses a workaround to being able to find a toolbar in a fragment
+//            Toolbar toolbar = ((AppCompatActivity)getActivity()).findViewById(R.id.toolbar);
+//            toolbar.setLabelFor(workout.getName());
         }
 
     }
