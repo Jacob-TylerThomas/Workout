@@ -2,11 +2,15 @@ package com.hfad.workout;
 
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import java.util.regex.Pattern;
+
 public class WorkoutDetailFragment extends Fragment {
     private long workoutId;
 
@@ -29,18 +33,23 @@ public void onCreate(Bundle savedInstanceState){
             TextView title = (TextView) view.findViewById(R.id.textTitle);
             TextView paragragh_header = view.findViewById(R.id.paragraph_header);
             paragragh_header.setText(R.string.Header_text);
-            TextView more_information = view.findViewById(R.id.moreInformation);
-            more_information.setText(R.string.More_information_text);
+//            TextView more_information = view.findViewById(R.id.moreInformation);
+//            more_information.setText(R.string.More_information_text);
             Workout workout = Workout.workouts[(int) workoutId];
             title.setText(workout.getName());
             TextView description = (TextView) view.findViewById(R.id.textDescription);
             description.setText(workout.getDescription());
             TextView caption = (TextView) view.findViewById(R.id.building_caption);
             caption.setText(workout.getCaption());
-            TextView link = (TextView) view.findViewById(R.id.building_link);
-            link.setText(workout.getLink());
+//            TextView link = (TextView) view.findViewById(R.id.building_link);
+//            link.setText(workout.getLink());
             ImageView image=view.findViewById(R.id.building_picture);
             image.setImageResource(workout.getImage());
+            TextView testLink = view.findViewById(R.id.moreInformation);
+            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
+            testLink.setText(R.string.More_information_text);
+            Linkify.addLinks(testLink, pattern, getContext().getResources().getString(workout.getLink()));
+
         }
 
     }

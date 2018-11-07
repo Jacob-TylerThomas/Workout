@@ -78,12 +78,13 @@
         android:layout_width="match_parent"
         android:layout_height="22dp"
         android:layout_marginTop="40dp"
-        android:autoLink="web"
-        android:linksClickable="true"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textDescription" />
+        <!--android:autoLink="web"-->
+        <!--android:linksClickable="true"-->
+
 
     <TextView
         android:id="@+id/moreInformation"
