@@ -19,15 +19,7 @@
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent">
 
-        <!--<include-->
-        <!--android:id="@+id/toolbar"-->
-        <!--layout="@layout/toolbar_main"-->
-        <!--android:layout_height="37dp"-->
-        <!--android:layout_marginBottom="8dp"-->
-        <!--app:layout_constraintBottom_toBottomOf="@+id/building_link"-->
-        <!--app:layout_constraintEnd_toEndOf="parent"-->
-        <!--app:layout_constraintStart_toStartOf="parent"-->
-        <!--app:layout_constraintTop_toTopOf="parent" />-->
+
 
         <TextView
             android:id="@+id/textTitle"
@@ -44,11 +36,11 @@
 
         <ImageView
             android:id="@+id/building_picture"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:layout_marginBottom="325dp"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/building_caption"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textTitle" />
