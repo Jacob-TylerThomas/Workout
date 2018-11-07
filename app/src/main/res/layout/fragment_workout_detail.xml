@@ -6,107 +6,102 @@
     <!--xmlns:tools="http://schemas.android.com/tools"-->
     <!--android:layout_width="match_parent"-->
     <!--android:layout_height="match_parent"-->
-    <!--android:isScrollContainer="false"-->
-    <!--&gt;-->
+    <!--android:orientation="vertical"-->
+    <!--android:fillViewport="true">-->
 
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintHorizontal_bias="0.5"
-    app:layout_constraintStart_toStartOf="parent">
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent">
 
-    <!--<include-->
+        <!--<include-->
         <!--android:id="@+id/toolbar"-->
         <!--layout="@layout/toolbar_main"-->
-        <!--app:layout_constraintBottom_toBottomOf="parent"-->
+        <!--android:layout_height="37dp"-->
+        <!--android:layout_marginBottom="8dp"-->
+        <!--app:layout_constraintBottom_toBottomOf="@+id/building_link"-->
         <!--app:layout_constraintEnd_toEndOf="parent"-->
         <!--app:layout_constraintStart_toStartOf="parent"-->
         <!--app:layout_constraintTop_toTopOf="parent" />-->
 
-    <TextView
-        android:id="@+id/textTitle"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="#008080"
-        android:gravity="center|top"
-        android:textAppearance="?android:attr/textAppearanceLarge"
-        android:textColor="#FFFFFF"
-        android:textSize="48sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        <TextView
+            android:id="@+id/textTitle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#008080"
+            android:gravity="center|top"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textColor="#FFFFFF"
+            android:textSize="48sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/building_picture"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginBottom="325dp"
-        android:scaleType="centerCrop"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textTitle" />
+        <ImageView
+            android:id="@+id/building_picture"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginBottom="325dp"
+            android:scaleType="centerCrop"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textTitle" />
 
-    <TextView
-        android:id="@+id/building_caption"
-        android:layout_width="match_parent"
-        android:layout_height="18dp"
-        android:layout_marginTop="8dp"
-        android:gravity="center"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="@+id/paragraph_header"
-        app:layout_constraintTop_toBottomOf="@+id/building_picture" />
+        <TextView
+            android:id="@+id/building_caption"
+            android:layout_width="match_parent"
+            android:layout_height="18dp"
+            android:layout_marginTop="8dp"
+            android:gravity="center"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="@+id/paragraph_header"
+            app:layout_constraintTop_toBottomOf="@+id/building_picture" />
 
-    <TextView
-        android:id="@+id/paragraph_header"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/textDescription"
-        app:layout_constraintTop_toBottomOf="@+id/building_caption"
-        app:layout_constraintVertical_bias="1.0"
-        tools:layout_editor_absoluteX="0dp" />
+        <TextView
+            android:id="@+id/paragraph_header"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:textSize="24sp"
+            app:layout_constraintBottom_toTopOf="@+id/nested"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/building_caption"
+            app:layout_constraintVertical_bias="1.0" />
 
-    <TextView
-        android:id="@+id/building_link"
-        android:layout_width="match_parent"
-        android:layout_height="22dp"
-        android:layout_marginTop="40dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescription" />
-        <!--android:autoLink="web"-->
-        <!--android:linksClickable="true"-->
 
+    <android.support.v4.widget.NestedScrollView
+        android:id="@+id/nested"
+        android:layout_width="382dp"
+        android:layout_height="222dp"
+        android:fillViewport="true"
+        android:focusableInTouchMode="true"
+        app:layout_constraintTop_toBottomOf="@+id/paragraph_header">
+
+        <TextView
+            android:id="@+id/textDescription"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+    </android.support.v4.widget.NestedScrollView>
 
     <TextView
         android:id="@+id/moreInformation"
         android:layout_width="0dp"
         android:layout_height="21dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toTopOf="@+id/building_link"
+        android:layout_marginTop="16dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textDescription" />
-
-    <TextView
-        android:id="@+id/textDescription"
-        android:layout_width="0dp"
-        android:layout_height="169dp"
-        android:layout_marginTop="92dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/building_picture" />
-
-
+        app:layout_constraintTop_toBottomOf="@+id/nested" />
 </android.support.constraint.ConstraintLayout>
 <!--</ScrollView>-->

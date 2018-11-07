@@ -19,13 +19,13 @@ public class Workout {
                     ),
             new Workout(R.string.Bear,
                     R.string.Bear_text,
-                    R.drawable.cis,
+                    R.drawable.bear,
                     R.string.Bear_caption,
                     R.string.Bear_link
                     ),
             new Workout(R.string.Dobo,
                     R.string.Dobo_text,
-                    R.drawable.cis,
+                    R.drawable.dobo,
                     R.string.Dobo_caption,
                     R.string.Dobo_link
                      ),

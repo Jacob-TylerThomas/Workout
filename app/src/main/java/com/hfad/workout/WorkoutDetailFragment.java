@@ -31,25 +31,25 @@ public void onCreate(Bundle savedInstanceState){
         View view = getView();
         if (view != null) {
             TextView title = (TextView) view.findViewById(R.id.textTitle);
-            TextView paragragh_header = view.findViewById(R.id.paragraph_header);
-            paragragh_header.setText(R.string.Header_text);
-//            TextView more_information = view.findViewById(R.id.moreInformation);
-//            more_information.setText(R.string.More_information_text);
             Workout workout = Workout.workouts[(int) workoutId];
             title.setText(workout.getName());
+
+            TextView paragragh_header = view.findViewById(R.id.paragraph_header);
+            paragragh_header.setText(R.string.Header_text);
+
             TextView description = (TextView) view.findViewById(R.id.textDescription);
             description.setText(workout.getDescription());
+
             TextView caption = (TextView) view.findViewById(R.id.building_caption);
             caption.setText(workout.getCaption());
-//            TextView link = (TextView) view.findViewById(R.id.building_link);
-//            link.setText(workout.getLink());
+
             ImageView image=view.findViewById(R.id.building_picture);
             image.setImageResource(workout.getImage());
-            TextView testLink = view.findViewById(R.id.moreInformation);
-            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
-            testLink.setText(R.string.More_information_text);
-            Linkify.addLinks(testLink, pattern, getContext().getResources().getString(workout.getLink()));
 
+            TextView buildingLink = view.findViewById(R.id.moreInformation);
+            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
+            buildingLink.setText(R.string.More_information_text);
+            Linkify.addLinks(buildingLink, pattern, getContext().getResources().getString(workout.getLink()));
         }
 
     }
