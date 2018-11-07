@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.support.v7.app.ActionBar;
 
 public class DetailActivity extends AppCompatActivity {
     public static final String EXTRA_WORKOUT_ID = "id";
@@ -20,6 +21,8 @@ public class DetailActivity extends AppCompatActivity {
         frag.setWorkout(workoutId);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        ActionBar actionBar = getSupportActionBar();
+        actionBar.setDisplayHomeAsUpEnabled(true);
 
     }
 
