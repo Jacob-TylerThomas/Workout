@@ -83,6 +83,9 @@
     <string name="Cameron_link">https://library.uncw.edu/web/collections/archives/bnl/24.html</string>
     <string name="Deloach_link">https://library.uncw.edu/web/collections/archives/bnl/2.html</string>
 
+    <string name="nav_open_drawer">Open navigation drawer</string>
+    <string name="nav_close_drawer">Close navigation drawer</string>
+
 
     <string-array name="spinner_values">
         <item>Select Building</item>
