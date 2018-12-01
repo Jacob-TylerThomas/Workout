@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!--couldn't figure out toolbar for this layout, removed it so it would stop messing it up-->
+<!--couldn't figure out toolbar for this layout, removed it so it -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="horizontal"
     android:layout_width="match_parent"

@@ -66,6 +66,9 @@ public class Workout {
     public Integer getLink() {
         return link;
     }
+    public int getImageResourceId() {
+        return image;
+    }
 
 
 }

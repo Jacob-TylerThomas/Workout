@@ -8,8 +8,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-public class MainActivity extends AppCompatActivity
-        implements WorkoutListFragment.Listener {
+public class MainActivity extends AppCompatActivity {
+//        implements WorkoutListFragment.Listener {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
-    @Override
+//    @Override
     public void itemClicked(long id) {
         View fragmentContainer = findViewById(R.id.fragment_container);
         if (fragmentContainer != null) {
