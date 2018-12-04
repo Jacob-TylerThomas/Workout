@@ -2,7 +2,6 @@ package com.hfad.workout;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.GravityCompat;
@@ -14,8 +13,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener{
+public class MainActivity extends AppCompatActivity {
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,15 +24,15 @@ public class MainActivity extends AppCompatActivity
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
-                drawer,
-                toolbar,
-                R.string.nav_open_drawer,
-                R.string.nav_close_drawer);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
+//        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this,
+//                drawer,
+//                toolbar,
+//                R.string.nav_open_drawer,
+//                R.string.nav_close_drawer);
+//        drawer.addDrawerListener(toggle);
+//        toggle.syncState();
+//        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener(this);
 
     }
     @Override
@@ -57,8 +56,7 @@ public class MainActivity extends AppCompatActivity
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    @Override
+    //@Override
     public boolean onNavigationItemSelected(MenuItem item) {
         int id = item.getItemId();
         Fragment fragment = null;
@@ -70,17 +68,12 @@ public class MainActivity extends AppCompatActivity
             default:
                 fragment = new WorkoutListFragment();
         }
-        if (fragment != null) {
-            FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
-            ft.replace(R.id.content_frame, fragment);
-            ft.commit();
-        } else {
-            startActivity(intent);
-        }
+        startActivity(intent);
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
+
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
