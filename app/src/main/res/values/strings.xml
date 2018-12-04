@@ -23,7 +23,7 @@
     <string name="Bear_caption">(A front view of Bear Hall)</string>
     <string name="Dobo_caption">(A front view of Dobo Hall)</string>
     <string name="Cameron_caption">(A front view of Cameron Hall)</string>
-    <string name="Deloach_caption">(A front view of Deloach Hall)</string>
+    <string name="Deloach_caption"></string>
 
     <string name="Header_text">A Brief History:</string>
     <string name="More_information_text">For more information, please visit here</string>
@@ -53,29 +53,29 @@
     <string name="Bear_text">
         Bear Hall opened at its present site in 1972 as the home for the Business and Economics Departments.
         Currently, the Departments of Computer Science, Mathematics and Statistics, and Philosophy and Religion occupy classrooms, teaching labs and faculty offices.
-        The College of Arts and Science also resides here. \n
-        \n
+        The College of Arts and Science also resides here.
+
     </string>
 
     <string name="Dobo_text">
         Opened for use in 1996, the New Science Building contained classrooms, laboratories and faculty offices for the Chemistry and Biology Departments.
-        Known as Dobo Hall since its 1999 dedication to the Dobo brothers, it is currently used by the Department of Biology and Marine Biology and the Department of Chemistry. \n
-        \n
+        Known as Dobo Hall since its 1999 dedication to the Dobo brothers, it is currently used by the Department of Biology and Marine Biology and the Department of Chemistry.
+
     </string>
 
     <string name="Cameron_text">
         Funding for Cameron Hall began in 1985, with occupancy starting in 1988.
         As the home of the Cameron School of Business, the building contains classrooms and faculty offices.
-        The official naming dedication was held on October 5, 1988. \n
-        \n
+        The official naming dedication was held on October 5, 1988.
+
     </string>
 
     <string name="Deloach_text">
         Originally called the Physics-Chemistry Building, this structure housed classrooms for those departments.
         Groundbreaking took place in July of 1967, occupation began in 1968, with the official renaming ceremony to DeLoach Hall in October of 1985.
         Currently the building holds offices and classrooms for the Department of Physics, Department of Physical Oceanography and the Department of Earth Sciences.
-        The Department of Chemistry was housed here until Dobo Hall opened. DeLoach Hall contains a large teaching auditorium and several laboratories. \n
-        \n
+        The Department of Chemistry was housed here until Dobo Hall opened. DeLoach Hall contains a large teaching auditorium and several laboratories.
+
     </string>
     <string name="CIS_link">https://library.uncw.edu/web/collections/archives/bnl/cis.html</string>
     <string name="Bear_link">https://library.uncw.edu/web/collections/archives/bnl/19.html</string>
