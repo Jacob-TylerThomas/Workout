@@ -1,6 +1,13 @@
 package com.hfad.workout;
 
+import io.objectbox.annotation.Entity;
+import io.objectbox.annotation.Id;
+
+@Entity
 public class WorkoutObject {
+
+    @Id
+    public long id;
 
     private String name;
     private String description;
@@ -10,7 +17,7 @@ public class WorkoutObject {
     private String latitude;
     private String longtitude;
 
-    private WorkoutObject(String name, String description, String image,String caption, String link,
+    public WorkoutObject(String name, String description, String image,String caption, String link,
                           String latitude,String longtitude) {
         this.name=name;
         this.description=description;
@@ -21,59 +28,59 @@ public class WorkoutObject {
         this.longtitude=longtitude;
     }
 
-    private String getName() {
+    public String getName() {
         return name;
     }
 
-    private void setName(String name) {
+    public void setName(String name) {
         this.name=name;
     }
 
-    private String getDescription() {
+    public String getDescription() {
         return description;
     }
 
-    private void setDescription(String description) {
+    public void setDescription(String description) {
         this.description=description;
     }
 
-    private String getImage() {
+    public String getImage() {
         return image;
     }
 
-    private void setImage(String image) {
+    public void setImage(String image) {
         this.image=image;
     }
 
-    private String getCaption() {
+    public String getCaption() {
         return caption;
     }
 
-    private void setCaption(String caption) {
+    public void setCaption(String caption) {
         this.caption=caption;
     }
 
-    private String getLink() {
+    public String getLink() {
         return link;
     }
 
-    private void setLink(String link) {
+    public void setLink(String link) {
         this.link=link;
     }
 
-    private String getLatitude() {
+    public String getLatitude() {
         return latitude;
     }
 
-    private void setLatitude(String latitude) {
+    public void setLatitude(String latitude) {
         this.latitude=latitude;
     }
 
-    private String getLongtitude() {
+    public String getLongtitude() {
         return longtitude;
     }
 
-    private void setLongtitude(String longtitude) {
+    public void setLongtitude(String longtitude) {
         this.longtitude=longtitude;
     }
 
