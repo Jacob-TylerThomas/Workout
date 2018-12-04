@@ -17,6 +17,8 @@ public class App extends Application {
         super.onCreate();
 
         // Initialize the main data access object
+
+        //test
         boxStore = MyObjectBox.builder().androidContext(App.this).build();
 
         // Get the wrapper (Box) for the WorkoutObject table that lets us store WorkoutObject objects
