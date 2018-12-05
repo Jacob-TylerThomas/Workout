@@ -6,10 +6,6 @@ public class Workout {
     private Integer caption;
     private Integer link;
 
-    private String convertedName;
-    private String convertedName2;
-    private Integer test;
-
     public static final Workout[] workouts = {
             new Workout(R.string.CIS,
                     R.string.CIS_text,

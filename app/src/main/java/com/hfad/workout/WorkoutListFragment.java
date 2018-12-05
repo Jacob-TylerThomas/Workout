@@ -31,31 +31,8 @@ public class WorkoutListFragment extends Fragment {
                     R.layout.fragment_workout_list, container, false);
             boxStore = ((App)getActivity().getApplication()).getBoxStore();
 
-        //this is meant to test to see if I can query the database for buildings who's names aren't null
-        Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
-        //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.name).build().find();
-        List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
-
-//        String[] workoutNames = new String[Workout.workouts.length];
-//            for (int i = 0; i < workoutNames.length; i++) {
-//                workoutNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
-//            }
-//            int[] workoutImages = new int[Workout.workouts.length];
-//            for (int i = 0; i < workoutImages.length; i++) {
-//                workoutImages[i] = Workout.workouts[i].getImageResourceId();
-//            }
-
-            //this works with the static list in WorkoutObject
-//            String[] workoutNames = new String[WorkoutObject.workouts.length];
-//            for (int i = 0; i < workoutNames.length; i++) {
-//                workoutNames[i] = (WorkoutObject.workouts[i].getName());
-//            }
-//
-//            int[] workoutImages = new int[WorkoutObject.workouts.length];
-//            for (int i = 0; i < workoutImages.length; i++) {
-//                workoutImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
-//                        "drawable", getActivity().getPackageName());
-//            }
+            Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
+            List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
 
             //this successfully pulls from the database to populate the cardview
             String[] workoutNames = new String[workoutList.size()];
@@ -63,8 +40,8 @@ public class WorkoutListFragment extends Fragment {
             workoutNames[i] = (workoutList.get(i).getName());
             }
 
-            int[] workoutImages = new int[WorkoutObject.workouts.length];
-            for (int i = 0; i < workoutImages.length; i++) {
+            int[] workoutImages = new int[workoutList.size()];
+            for (int i = 0; i < workoutList.size(); i++) {
                 workoutImages[i] = getResources().getIdentifier(workoutList.get(i).getImage(),
                         "drawable", getActivity().getPackageName());
             }
