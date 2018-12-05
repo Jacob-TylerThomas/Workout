@@ -25,7 +25,7 @@ public class WorkoutListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-            RecyclerView pizzaRecycler = (RecyclerView)inflater.inflate(
+            RecyclerView workoutRecycler = (RecyclerView)inflater.inflate(
                     R.layout.fragment_workout_list, container, false);
             boxStore = ((App)getActivity().getApplication()).getBoxStore();
 
@@ -34,31 +34,32 @@ public class WorkoutListFragment extends Fragment {
             //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.name).build().find();
             List<WorkoutObject> TestList2= WorkoutObjectBox.getAll();
 
-//        String[] pizzaNames = new String[Workout.workouts.length];
-//            for (int i = 0; i < pizzaNames.length; i++) {
-//                pizzaNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
-//            }
-//            int[] pizzaImages = new int[Workout.workouts.length];
-//            for (int i = 0; i < pizzaImages.length; i++) {
-//                pizzaImages[i] = Workout.workouts[i].getImageResourceId();
-//            }
+
+        String[] workoutNames = new String[Workout.workouts.length];
+            for (int i = 0; i < workoutNames.length; i++) {
+                workoutNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
+            }
+            int[] workoutImages = new int[Workout.workouts.length];
+            for (int i = 0; i < workoutImages.length; i++) {
+                workoutImages[i] = Workout.workouts[i].getImageResourceId();
+            }
 
             //trying to convert the above lists into strings so that they can pull from the WorkoutObject list
-            String[] pizzaNames = new String[WorkoutObject.workouts.length];
-            for (int i = 0; i < pizzaNames.length; i++) {
-                pizzaNames[i] = (WorkoutObject.workouts[i].getName());
-            }
-            int[] pizzaImages = new int[WorkoutObject.workouts.length];
-            for (int i = 0; i < pizzaImages.length; i++) {
-                pizzaImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
-                        "drawable", getActivity().getPackageName());
-            }
+//            String[] pizzaNames = new String[WorkoutObject.workouts.length];
+//            for (int i = 0; i < pizzaNames.length; i++) {
+//                pizzaNames[i] = (WorkoutObject.workouts[i].getName());
+//            }
+//            int[] pizzaImages = new int[WorkoutObject.workouts.length];
+//            for (int i = 0; i < pizzaImages.length; i++) {
+//                pizzaImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
+//                        "drawable", getActivity().getPackageName());
+//            }
 
             CaptionedImagesAdapter adapter =
-                    new CaptionedImagesAdapter(pizzaNames, pizzaImages);
-            pizzaRecycler.setAdapter(adapter);
+                    new CaptionedImagesAdapter(workoutNames, workoutImages);
+            workoutRecycler.setAdapter(adapter);
             GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
-            pizzaRecycler.setLayoutManager(layoutManager);
+            workoutRecycler.setLayoutManager(layoutManager);
             adapter.setListener(new CaptionedImagesAdapter.Listener() {
                 public void onClick(int position) {
                     Intent intent = new Intent(getActivity(), DetailActivity.class);
@@ -66,7 +67,7 @@ public class WorkoutListFragment extends Fragment {
                     getActivity().startActivity(intent);
                 }
             });
-            return pizzaRecycler;
+            return workoutRecycler;
     }
 }
 
