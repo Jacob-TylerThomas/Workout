@@ -13,6 +13,7 @@ class CaptionedImagesAdapter extends
         RecyclerView.Adapter<CaptionedImagesAdapter.ViewHolder>{
     private String[] captions;
     private int[] imageIds;
+//    private String[] imageIds;
     private Listener listener;
     interface Listener {
         void onClick(int position);
@@ -28,6 +29,13 @@ class CaptionedImagesAdapter extends
         this.captions = captions;
         this.imageIds = imageIds;
     }
+
+//    //trying to convert the lists into strings so that WorkoutListFragment can take them
+//    public CaptionedImagesAdapter(String[] captions, String[] imageIds){
+//        this.captions = captions;
+//        this.imageIds = imageIds;
+//    }
+
     @Override
     public int getItemCount(){
         return captions.length;

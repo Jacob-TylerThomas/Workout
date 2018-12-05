@@ -13,13 +13,26 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-//public class WorkoutListFragment extends ListFragment {
+
+import java.util.List;
+
+import io.objectbox.Box;
+import io.objectbox.BoxStore;
+
 public class WorkoutListFragment extends Fragment {
+    private BoxStore boxStore;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         RecyclerView pizzaRecycler = (RecyclerView)inflater.inflate(
                 R.layout.fragment_workout_list, container, false);
+
+        //this is meant to test to see if I can query the database for buildings who's names aren't null
+//        Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
+        //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.getName);
+
+
         String[] pizzaNames = new String[Workout.workouts.length];
         for (int i = 0; i < pizzaNames.length; i++) {
             pizzaNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
@@ -28,6 +41,17 @@ public class WorkoutListFragment extends Fragment {
         for (int i = 0; i < pizzaImages.length; i++) {
             pizzaImages[i] = Workout.workouts[i].getImageResourceId();
         }
+
+        //trying to convert the above lists into strings so that they can pull from the WorkoutObject list
+//        String[] pizzaNames = new String[WorkoutObject.workouts.length];
+//        for (int i = 0; i < pizzaNames.length; i++) {
+//            pizzaNames[i] = (WorkoutObject.workouts[i].getName());
+//        }
+//        String[] pizzaImages = new String[WorkoutObject.workouts.length];
+//        for (int i = 0; i < pizzaImages.length; i++) {
+//            pizzaImages[i] = (WorkoutObject.workouts[i].getImage());
+//        }
+
         CaptionedImagesAdapter adapter =
                 new CaptionedImagesAdapter(pizzaNames, pizzaImages);
         pizzaRecycler.setAdapter(adapter);

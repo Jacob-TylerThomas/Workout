@@ -74,7 +74,6 @@ public class App extends Application {
                     "34.228831799999995",
                     "-77.87445745000001"));
 
-
             // ObjectBox is smart enough to handle CRUD on Collections of entities
             WorkoutObjectBox.put(initialWorkoutObjects);
         }
