@@ -14,6 +14,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
 import io.objectbox.Box;
@@ -30,30 +32,42 @@ public class WorkoutListFragment extends Fragment {
             boxStore = ((App)getActivity().getApplication()).getBoxStore();
 
         //this is meant to test to see if I can query the database for buildings who's names aren't null
-            Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
-            //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.name).build().find();
-            List<WorkoutObject> TestList2= WorkoutObjectBox.getAll();
+        Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
+        //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.name).build().find();
+        List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
 
-
-        String[] workoutNames = new String[Workout.workouts.length];
-            for (int i = 0; i < workoutNames.length; i++) {
-                workoutNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
-            }
-            int[] workoutImages = new int[Workout.workouts.length];
-            for (int i = 0; i < workoutImages.length; i++) {
-                workoutImages[i] = Workout.workouts[i].getImageResourceId();
-            }
-
-            //trying to convert the above lists into strings so that they can pull from the WorkoutObject list
-//            String[] pizzaNames = new String[WorkoutObject.workouts.length];
-//            for (int i = 0; i < pizzaNames.length; i++) {
-//                pizzaNames[i] = (WorkoutObject.workouts[i].getName());
+//        String[] workoutNames = new String[Workout.workouts.length];
+//            for (int i = 0; i < workoutNames.length; i++) {
+//                workoutNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
 //            }
-//            int[] pizzaImages = new int[WorkoutObject.workouts.length];
-//            for (int i = 0; i < pizzaImages.length; i++) {
-//                pizzaImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
+//            int[] workoutImages = new int[Workout.workouts.length];
+//            for (int i = 0; i < workoutImages.length; i++) {
+//                workoutImages[i] = Workout.workouts[i].getImageResourceId();
+//            }
+
+            //this works with the static list in WorkoutObject
+//            String[] workoutNames = new String[WorkoutObject.workouts.length];
+//            for (int i = 0; i < workoutNames.length; i++) {
+//                workoutNames[i] = (WorkoutObject.workouts[i].getName());
+//            }
+//
+//            int[] workoutImages = new int[WorkoutObject.workouts.length];
+//            for (int i = 0; i < workoutImages.length; i++) {
+//                workoutImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
 //                        "drawable", getActivity().getPackageName());
 //            }
+
+            //this successfully pulls from the database to populate the cardview
+            String[] workoutNames = new String[workoutList.size()];
+            for (int i = 0; i < workoutList.size(); i++) {
+            workoutNames[i] = (workoutList.get(i).getName());
+            }
+
+            int[] workoutImages = new int[WorkoutObject.workouts.length];
+            for (int i = 0; i < workoutImages.length; i++) {
+                workoutImages[i] = getResources().getIdentifier(workoutList.get(i).getImage(),
+                        "drawable", getActivity().getPackageName());
+            }
 
             CaptionedImagesAdapter adapter =
                     new CaptionedImagesAdapter(workoutNames, workoutImages);
@@ -70,35 +84,3 @@ public class WorkoutListFragment extends Fragment {
             return workoutRecycler;
     }
 }
-
-//        static interface Listener {
-//        void itemClicked(long id);
-//    };
-//    private Listener listener;
-//    private String test;
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        String[] names = new String[Workout.workouts.length];
-//        for (int i = 0; i < names.length; i++) {
-//            names[i] = getContext().getResources().getString(Workout.workouts[i].getName());
-//        }
-//        ArrayAdapter<String> adapter = new ArrayAdapter<>(
-//                inflater.getContext(), android.R.layout.simple_list_item_1,
-//                names);
-//        setListAdapter(adapter);
-//        return super.onCreateView(inflater, container, savedInstanceState);
-//    }
-//    @Override
-//    //attachs fragment to activity
-//    public void onAttach(Context context) {
-//        super.onAttach(context);
-//        this.listener = (Listener)context;
-//    }
-//    @Override
-//    //tells listener when an item in the list view is clicked
-//    public void onListItemClick(ListView listView, View itemView, int position, long id) {
-//        if (listener != null) {
-//            listener.itemClicked(id);
-//        }
-//    }
