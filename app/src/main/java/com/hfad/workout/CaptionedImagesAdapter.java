@@ -31,6 +31,7 @@ class CaptionedImagesAdapter extends
     }
 
 //    //trying to convert the lists into strings so that WorkoutListFragment can take them
+
 //    public CaptionedImagesAdapter(String[] captions, String[] imageIds){
 //        this.captions = captions;
 //        this.imageIds = imageIds;

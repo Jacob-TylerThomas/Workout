@@ -25,46 +25,48 @@ public class WorkoutListFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        RecyclerView pizzaRecycler = (RecyclerView)inflater.inflate(
-                R.layout.fragment_workout_list, container, false);
+            RecyclerView pizzaRecycler = (RecyclerView)inflater.inflate(
+                    R.layout.fragment_workout_list, container, false);
+            boxStore = ((App)getActivity().getApplication()).getBoxStore();
 
         //this is meant to test to see if I can query the database for buildings who's names aren't null
-//        Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
-        //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.getName);
+            Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
+            //List<WorkoutObject> TestList= WorkoutObjectBox.query().notNull(WorkoutObject_.name).build().find();
+            List<WorkoutObject> TestList2= WorkoutObjectBox.getAll();
 
+//        String[] pizzaNames = new String[Workout.workouts.length];
+//            for (int i = 0; i < pizzaNames.length; i++) {
+//                pizzaNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
+//            }
+//            int[] pizzaImages = new int[Workout.workouts.length];
+//            for (int i = 0; i < pizzaImages.length; i++) {
+//                pizzaImages[i] = Workout.workouts[i].getImageResourceId();
+//            }
 
-        String[] pizzaNames = new String[Workout.workouts.length];
-        for (int i = 0; i < pizzaNames.length; i++) {
-            pizzaNames[i] = getContext().getResources().getString(Workout.workouts[i].getName());
-        }
-        int[] pizzaImages = new int[Workout.workouts.length];
-        for (int i = 0; i < pizzaImages.length; i++) {
-            pizzaImages[i] = Workout.workouts[i].getImageResourceId();
-        }
-
-        //trying to convert the above lists into strings so that they can pull from the WorkoutObject list
-//        String[] pizzaNames = new String[WorkoutObject.workouts.length];
-//        for (int i = 0; i < pizzaNames.length; i++) {
-//            pizzaNames[i] = (WorkoutObject.workouts[i].getName());
-//        }
-//        String[] pizzaImages = new String[WorkoutObject.workouts.length];
-//        for (int i = 0; i < pizzaImages.length; i++) {
-//            pizzaImages[i] = (WorkoutObject.workouts[i].getImage());
-//        }
-
-        CaptionedImagesAdapter adapter =
-                new CaptionedImagesAdapter(pizzaNames, pizzaImages);
-        pizzaRecycler.setAdapter(adapter);
-        GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
-        pizzaRecycler.setLayoutManager(layoutManager);
-        adapter.setListener(new CaptionedImagesAdapter.Listener() {
-            public void onClick(int position) {
-                Intent intent = new Intent(getActivity(), DetailActivity.class);
-                intent.putExtra(DetailActivity.EXTRA_WORKOUT_ID, position);
-                getActivity().startActivity(intent);
+            //trying to convert the above lists into strings so that they can pull from the WorkoutObject list
+            String[] pizzaNames = new String[WorkoutObject.workouts.length];
+            for (int i = 0; i < pizzaNames.length; i++) {
+                pizzaNames[i] = (WorkoutObject.workouts[i].getName());
             }
-        });
-        return pizzaRecycler;
+            int[] pizzaImages = new int[WorkoutObject.workouts.length];
+            for (int i = 0; i < pizzaImages.length; i++) {
+                pizzaImages[i] = getResources().getIdentifier(WorkoutObject.workouts[i].getImage(),
+                        "drawable", getActivity().getPackageName());
+            }
+
+            CaptionedImagesAdapter adapter =
+                    new CaptionedImagesAdapter(pizzaNames, pizzaImages);
+            pizzaRecycler.setAdapter(adapter);
+            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+            pizzaRecycler.setLayoutManager(layoutManager);
+            adapter.setListener(new CaptionedImagesAdapter.Listener() {
+                public void onClick(int position) {
+                    Intent intent = new Intent(getActivity(), DetailActivity.class);
+                    intent.putExtra(DetailActivity.EXTRA_WORKOUT_ID, position);
+                    getActivity().startActivity(intent);
+                }
+            });
+            return pizzaRecycler;
     }
 }
 
