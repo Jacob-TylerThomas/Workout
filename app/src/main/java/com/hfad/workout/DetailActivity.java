@@ -18,7 +18,6 @@ public class DetailActivity extends AppCompatActivity {
                 getSupportFragmentManager().findFragmentById(R.id.detail_frag);
         //grabs the workout ID
         int workoutId = (int) getIntent().getExtras().get(EXTRA_WORKOUT_ID);
-//        frag.setWorkoutId(workoutId);
         frag.setWorkout(workoutId);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);

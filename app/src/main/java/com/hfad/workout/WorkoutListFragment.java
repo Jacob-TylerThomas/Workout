@@ -35,16 +35,16 @@ public class WorkoutListFragment extends Fragment {
             List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
 
             //this successfully pulls from the database to populate the cardview
-            String[] workoutNames = new String[workoutList.size()];
-            for (int i = 0; i < workoutList.size(); i++) {
+        String[] workoutNames = new String[workoutList.size()];
+        for (int i = 0; i < workoutList.size(); i++) {
             workoutNames[i] = (workoutList.get(i).getName());
-            }
+        }
 
-            int[] workoutImages = new int[workoutList.size()];
-            for (int i = 0; i < workoutList.size(); i++) {
-                workoutImages[i] = getResources().getIdentifier(workoutList.get(i).getImage(),
-                        "drawable", getActivity().getPackageName());
-            }
+        int[] workoutImages = new int[workoutList.size()];
+        for (int i = 0; i < workoutList.size(); i++) {
+            workoutImages[i] = getResources().getIdentifier(workoutList.get(i).getImage(),
+                    "drawable", getActivity().getPackageName());
+        }
 
             CaptionedImagesAdapter adapter =
                     new CaptionedImagesAdapter(workoutNames, workoutImages);

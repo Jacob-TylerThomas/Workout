@@ -29,13 +29,6 @@ class CaptionedImagesAdapter extends
         this.imageIds = imageIds;
     }
 
-//    //trying to convert the lists into strings so that WorkoutListFragment can take them
-
-//    public CaptionedImagesAdapter(String[] captions, String[] imageIds){
-//        this.captions = captions;
-//        this.imageIds = imageIds;
-//    }
-
     @Override
     public int getItemCount(){
         return captions.length;
