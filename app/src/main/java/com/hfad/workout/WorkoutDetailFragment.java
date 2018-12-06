@@ -17,17 +17,14 @@ import io.objectbox.BoxStore;
 
 public class WorkoutDetailFragment extends Fragment  {
     private long workoutId;
-    private BoxStore boxStore;
-
-
+//    private BoxStore boxStore;
+    private Box<WorkoutObject> boxStore;
+    private TextView title;
 
     public void onCreate(Bundle savedInstanceState){
     super.onCreate(savedInstanceState);
     if (savedInstanceState != null) {
         workoutId = savedInstanceState.getLong("workoutId");
-        boxStore = ((App)getActivity().getApplication()).getBoxStore();
-//        Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
-//        List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
     }
 }
     @Override
@@ -36,66 +33,36 @@ public class WorkoutDetailFragment extends Fragment  {
         return inflater.inflate(R.layout.fragment_workout_detail, container, false);
     }
 
-    //If it is defined outside of onCreate WorkoutObjectBox keeps being considered null
-
-//    Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
-//    List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
-//    String[] testing = new String[workoutList.size()];
-
-
     @Override
     public void onStart() {
         super.onStart();
+        boxStore = ((App)getActivity().getApplication()).getBoxStore().boxFor(WorkoutObject.class);
+        List<WorkoutObject> workoutList= boxStore.getAll();
         View view = getView();
         if (view != null) {
+
 //            String[] workoutNames = new String[workoutList.size()];
-//            for (int i = 4; i < workoutList.size(); i++) {
-//                workoutNames[i] = (workoutList.get(i).getName());
-//
-//            }
 
-//            TextView title = (TextView) view.findViewById(R.id.textTitle);
-//            title.setText(workoutList.getName());
+            title = getView().findViewById(R.id.textTitle);
+            title.setText(workoutList.get((int) workoutId).getName());
 
-//            TextView paragragh_header = view.findViewById(R.id.paragraph_header);
-//            paragragh_header.setText(R.string.Header_text);
-//
-//            TextView description = (TextView) view.findViewById(R.id.textDescription);
-//            description.setText(workoutList.getClass().getDescription());
-//
-//            TextView caption = (TextView) view.findViewById(R.id.building_caption);
-//            caption.setText(workoutList.getClass().getCaption());
-//
-//            ImageView image=view.findViewById(R.id.building_picture);
-//            image.setImageResource(workout.getImage());
-//
-//            TextView buildingLink = view.findViewById(R.id.moreInformation);
-//            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
-//            buildingLink.setText(R.string.More_information_text);
-//            Linkify.addLinks(buildingLink, pattern, getContext().getResources().getString(workout.getLink()));
-
-            Workout workout = Workout.workouts[(int) workoutId];
-
-            TextView title = (TextView) view.findViewById(R.id.textTitle);
-            title.setText(workout.getName());
-
-            TextView paragragh_header = view.findViewById(R.id.paragraph_header);
+            TextView paragragh_header = getView().findViewById(R.id.paragraph_header);
             paragragh_header.setText(R.string.Header_text);
 
-            TextView description = (TextView) view.findViewById(R.id.textDescription);
-            description.setText(workout.getDescription());
+            TextView description = (TextView) getView().findViewById(R.id.textDescription);
+            description.setText(workoutList.get((int) workoutId).getDescription());
 
-            TextView caption = (TextView) view.findViewById(R.id.building_caption);
-            caption.setText(workout.getCaption());
+            TextView caption = (TextView) getView().findViewById(R.id.building_caption);
+            caption.setText(workoutList.get((int) workoutId).getCaption());
 
-            ImageView image=view.findViewById(R.id.building_picture);
-            image.setImageResource(workout.getImage());
+            ImageView image=getView().findViewById(R.id.building_picture);
+        image.setImageResource(getResources().getIdentifier(workoutList.get((int) workoutId).getImage(),
+                "drawable", getActivity().getPackageName()));
 
-            TextView buildingLink = view.findViewById(R.id.moreInformation);
-            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
-            buildingLink.setText(R.string.More_information_text);
-            Linkify.addLinks(buildingLink, pattern, getContext().getResources().getString(workout.getLink()));
-
+        TextView buildingLink = getView().findViewById(R.id.moreInformation);
+        Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
+        buildingLink.setText(R.string.More_information_text);
+        Linkify.addLinks(buildingLink, pattern, workoutList.get((int) workoutId).getLink());
         }
 
     }

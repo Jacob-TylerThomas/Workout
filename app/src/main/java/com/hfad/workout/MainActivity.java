@@ -28,6 +28,7 @@ import com.google.android.gms.common.api.ResolvableApiException;
 import com.google.android.gms.location.FusedLocationProviderClient;
 import com.google.android.gms.location.LocationCallback;
 import com.google.android.gms.location.LocationRequest;
+import com.google.android.gms.location.LocationResult;
 import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResponse;
@@ -35,6 +36,8 @@ import com.google.android.gms.location.SettingsClient;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
+
+import java.util.Date;
 
 import io.objectbox.Box;
 
@@ -62,7 +65,29 @@ public class MainActivity extends AppCompatActivity {
 //        mRecyclerView.setAdapter(adapter);
 ////        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
 ////                DividerItemDecoration.VERTICAL));
-//        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+        mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
+
+//        mLocationCallback = new LocationCallback() {
+//            @Override
+//            public void onLocationResult(LocationResult locationResult) {
+//                if (locationResult != null) {
+//                    for (Location location : locationResult.getLocations()) {
+//                        latText.setText(String.format("%.7f", location.getLatitude()));
+//                        lonText.setText(String.format("%.7f", location.getLongitude()));
+//                        accuracyText.setText(String.format("%.2f", location.getAccuracy()));
+//
+//                        locationBox.put(new LocationRecording(new Date(location.getTime()), location.getLatitude(), location.getLongitude(), location.getAccuracy()));
+//                        adapter.notifyDataSetChanged();
+//                    }
+//                }
+//            }
+//        };
+//
+//        if (savedInstanceState != null) {
+//            latText.setText(savedInstanceState.getCharSequence(LATITUDE_KEY));
+//            lonText.setText(savedInstanceState.getCharSequence(LONGITUDE_KEY));
+//            accuracyText.setText(savedInstanceState.getCharSequence(ACCURACY_KEY));
+//        }
 
     }
 
@@ -259,6 +284,7 @@ public class MainActivity extends AppCompatActivity {
 //    protected void onResume() {
 //        super.onResume();
 //        createLocationRequest();
+//        //cause of issue
 //    }
 
     private void startLocationUpdates() {
