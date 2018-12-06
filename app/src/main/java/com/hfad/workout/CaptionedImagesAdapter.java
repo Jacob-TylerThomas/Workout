@@ -13,7 +13,6 @@ class CaptionedImagesAdapter extends
         RecyclerView.Adapter<CaptionedImagesAdapter.ViewHolder>{
     private String[] captions;
     private int[] imageIds;
-//    private String[] imageIds;
     private Listener listener;
     interface Listener {
         void onClick(int position);

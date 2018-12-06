@@ -2,6 +2,7 @@
 <android.support.v4.widget.DrawerLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
@@ -19,6 +20,20 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--clicking on the button after giving permissions crashes the app-->
+        <Button
+            android:id="@+id/nearestBuilding"
+            android:layout_width="match_parent"
+            android:layout_height="44dp"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:textSize="12sp"
+            android:text="Find Nearest Building"
+            android:onClick="recordClick"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/toolbar" />
+
 
         <fragment xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/main_frag"
@@ -27,7 +42,7 @@
         android:layout_height="wrap_content"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/toolbar" />
+        app:layout_constraintTop_toBottomOf="@id/nearestBuilding" />
 
 
     </android.support.constraint.ConstraintLayout>
