@@ -9,6 +9,8 @@ public class WorkoutObject {
     @Id
     public long id;
 
+    public String buildId;
+
     private String name;
     private String description;
     private String image;
@@ -17,8 +19,9 @@ public class WorkoutObject {
     private String latitude;
     private String longtitude;
 
-    public WorkoutObject(String name, String description, String image,String caption, String link,
+    public WorkoutObject(String buildId, String name, String description, String image,String caption, String link,
                           String latitude,String longtitude) {
+        this.buildId=buildId;
         this.name=name;
         this.description=description;
         this.image=image;
@@ -29,6 +32,14 @@ public class WorkoutObject {
     }
 
     public WorkoutObject() {
+    }
+
+    public String getBuildId() {
+        return buildId;
+    }
+
+    public void setId(String buildId) {
+        this.buildId=buildId;
     }
 
     public String getName() {

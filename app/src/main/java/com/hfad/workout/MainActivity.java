@@ -38,8 +38,16 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Map;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
@@ -64,13 +72,13 @@ public class MainActivity extends AppCompatActivity {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
 
 
-//        //throws a nullpointerexception error
+        //throws a nullpointerexception error
 //        mRecyclerView = findViewById(R.id.card_view);
-//////        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+//        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
 //        adapter = new LocationRecordAdapter(locationBox);
 //        mRecyclerView.setAdapter(adapter);
-////        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
-////                DividerItemDecoration.VERTICAL));
+//        mRecyclerView.addItemDecoration(new DividerItemDecoration(this,
+//                DividerItemDecoration.VERTICAL));
         mFusedLocationClient = LocationServices.getFusedLocationProviderClient(this);
 
 //        mLocationCallback = new LocationCallback() {
@@ -164,7 +172,27 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
     }
+    private  HashMap sortByValues(HashMap map) {
+        List list = new LinkedList(map.entrySet());
+        // Defined Custom Comparator here
+        Collections.sort(list, new Comparator() {
+            public int compare(Object o1, Object o2) {
+                return ((Comparable) ((Map.Entry) (o1)).getValue())
+                        .compareTo(((Map.Entry) (o2)).getValue());
+            }
+        });
 
+        // Here I am copying the sorted list in HashMap
+        // using LinkedHashMap to preserve the insertion order
+        HashMap sortedHashMap = new LinkedHashMap();
+        for (Iterator it = list.iterator(); it.hasNext();) {
+            Map.Entry entry = (Map.Entry) it.next();
+            sortedHashMap.put(entry.getKey(), entry.getValue());
+        }
+        System.out.print(sortedHashMap);
+        map=sortedHashMap;
+        return sortedHashMap;
+    }
     public void recordClick(View view) {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -188,17 +216,45 @@ public class MainActivity extends AppCompatActivity {
                             // Got last known location. In some rare situations this can be null.
                             Button nearBuiling = findViewById(R.id.nearestBuilding);
                             if (location != null) {
+//                                itemClicked(0);
                                 boxStore = ((App)getApplication()).getBoxStore();
                                 Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
                                 List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
-                                String[] workoutImages = new String[workoutList.size()];
+                                String[] latitutdes = new String[workoutList.size()];
                                 //run a sorting algorithm on the list to be able to get the lowest distance
                                 for (int i = 0; i < workoutList.size(); i++) {
                                     //figure out how to make a double list
-                                    workoutImages[i] = [workoutList.get(i).getLatitude(), workoutList.get(i).getLongtitude()];
+                                    latitutdes[i] = workoutList.get(i).getLatitude();
                                 }
-//                                int distance = Math.sqrt(Math.pow((location.getLatitude()-buildingLat),2) + Math.pow((location.getLongitude()-buildingLon),2));
-                                //double distance = Math.sqrt(mLocationRequest, mLocationCallback);
+
+                                String[] longitudes = new String[workoutList.size()];
+                                //run a sorting algorithm on the list to be able to get the lowest distance
+                                for (int i = 0; i < workoutList.size(); i++) {
+                                    //figure out how to make a double list
+                                    longitudes[i] = workoutList.get(i).getLatitude();
+                                }
+                                Double[] distances = new Double[5];
+
+                                for (double i = 0; i < latitutdes.length; i++) {
+                                    for (double j = 0; j < longitudes.length; j++) {
+
+
+                                        double distance = Math.sqrt(Math.pow((location.getLatitude()-i),2) + Math.pow((location.getLongitude()-j),2));
+                                        distances[(int) j] = distance;
+                                    }
+                                }
+                                System.out.print(distances);
+                                HashMap<String, Double> map = new HashMap<String, Double>();
+                                for (long i = 0; i < workoutList.size(); i++) {
+                                    for (double j = 0; j < distances.length; j++) {
+                                        map.put(workoutList.get((int) i).getBuildId(),distances[(int) i]);
+
+                                    }
+                                }
+                                System.out.print(map);
+                                sortByValues(map);
+                                System.out.print(map);
+
                                 nearBuiling.setText(String.format("\n Longitude: %1$s \\n Latitude: %2$s\",",location.getLatitude(), location.getLongitude()));
 
 
@@ -230,110 +286,110 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private static int REQUEST_CHECK_SETTINGS = 123;
-    private LocationRequest mLocationRequest;
-    private LocationCallback mLocationCallback;
-    private static String LATITUDE_KEY = "latitude";
-    private static String LONGITUDE_KEY = "longitude";
-    private static String ACCURACY_KEY = "accuracy";
-
-    /**
-     * This method is called to kick off the chain of events that requests continuous location updates.
-     */
-    protected void createLocationRequest() {
-        if (mLocationRequest == null) {
-            mLocationRequest = new LocationRequest();
-            mLocationRequest.setInterval(10000);
-            mLocationRequest.setFastestInterval(5000);
-            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
-        }
-
-        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
-                .addLocationRequest(mLocationRequest);
-
-        SettingsClient client = LocationServices.getSettingsClient(this);
-        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
-
-        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
-            @Override
-            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
-                // All location settings are satisfied. The client can initialize
-                // location requests here.
-                // ...
-                startLocationUpdates();
-            }
-        });
-
-        task.addOnFailureListener(this, new OnFailureListener() {
-            @Override
-            public void onFailure(@NonNull Exception e) {
-                if (e instanceof ResolvableApiException) {
-                    // Location settings are not satisfied, but this can be fixed
-                    // by showing the user a dialog.
-                    try {
-                        // Show the dialog by calling startResolutionForResult(),
-                        // and check the result in onActivityResult().
-                        ResolvableApiException resolvable = (ResolvableApiException) e;
-                        resolvable.startResolutionForResult(MainActivity.this,
-                                REQUEST_CHECK_SETTINGS);
-                    } catch (IntentSender.SendIntentException sendEx) {
-                        // Ignore the error.
-                    }
-                }
-            }
-        });
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (requestCode == REQUEST_CHECK_SETTINGS) {
-            // Regardless of whether the user fixed the issue or not, try again.
-            // This could be really annoying for the user...
-            // In reality, you should check the resultCode for success. If not successful, you
-            // should degrade the functionality.
-            createLocationRequest();
-        }
-    }
-
-    //causes app to freeze when clicking buildings
-    //causes app to crash when you give location permissions
-//    @Override
-//    protected void onResume() {
-//        super.onResume();
-//        createLocationRequest();
-//        //cause of issue
+//    private static int REQUEST_CHECK_SETTINGS = 123;
+//    private LocationRequest mLocationRequest;
+//    private LocationCallback mLocationCallback;
+//    private static String LATITUDE_KEY = "latitude";
+//    private static String LONGITUDE_KEY = "longitude";
+//    private static String ACCURACY_KEY = "accuracy";
+//
+//    /**
+//     * This method is called to kick off the chain of events that requests continuous location updates.
+//     */
+//    protected void createLocationRequest() {
+//        if (mLocationRequest == null) {
+//            mLocationRequest = new LocationRequest();
+//            mLocationRequest.setInterval(10000);
+//            mLocationRequest.setFastestInterval(5000);
+//            mLocationRequest.setPriority(LocationRequest.PRIORITY_HIGH_ACCURACY);
+//        }
+//
+//        LocationSettingsRequest.Builder builder = new LocationSettingsRequest.Builder()
+//                .addLocationRequest(mLocationRequest);
+//
+//        SettingsClient client = LocationServices.getSettingsClient(this);
+//        Task<LocationSettingsResponse> task = client.checkLocationSettings(builder.build());
+//
+//        task.addOnSuccessListener(this, new OnSuccessListener<LocationSettingsResponse>() {
+//            @Override
+//            public void onSuccess(LocationSettingsResponse locationSettingsResponse) {
+//                // All location settings are satisfied. The client can initialize
+//                // location requests here.
+//                // ...
+//                startLocationUpdates();
+//            }
+//        });
+//
+//        task.addOnFailureListener(this, new OnFailureListener() {
+//            @Override
+//            public void onFailure(@NonNull Exception e) {
+//                if (e instanceof ResolvableApiException) {
+//                    // Location settings are not satisfied, but this can be fixed
+//                    // by showing the user a dialog.
+//                    try {
+//                        // Show the dialog by calling startResolutionForResult(),
+//                        // and check the result in onActivityResult().
+//                        ResolvableApiException resolvable = (ResolvableApiException) e;
+//                        resolvable.startResolutionForResult(MainActivity.this,
+//                                REQUEST_CHECK_SETTINGS);
+//                    } catch (IntentSender.SendIntentException sendEx) {
+//                        // Ignore the error.
+//                    }
+//                }
+//            }
+//        });
 //    }
-
-    private void startLocationUpdates() {
-        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                != PackageManager.PERMISSION_GRANTED) {
-            //commented about because it kept popping up repeatedly
-//            Toast.makeText(this, "I need permission to access location in order to record locations.", Toast.LENGTH_SHORT).show();
-
-            ActivityCompat.requestPermissions(this,
-                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
-        } else {
-            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
-                    mLocationCallback,
-                    null /* Looper */);
-        }
-    }
-
+//
 //    @Override
-//    protected void onPause() {
-//        super.onPause();
-//        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+//    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        if (requestCode == REQUEST_CHECK_SETTINGS) {
+//            // Regardless of whether the user fixed the issue or not, try again.
+//            // This could be really annoying for the user...
+//            // In reality, you should check the resultCode for success. If not successful, you
+//            // should degrade the functionality.
+//            createLocationRequest();
+//        }
 //    }
-
-    @Override
-    protected void onSaveInstanceState(Bundle outState) {
-//        outState.putCharSequence(LATITUDE_KEY, latText.getText());
-//        outState.putCharSequence(LONGITUDE_KEY, lonText.getText());
-//        outState.putCharSequence(ACCURACY_KEY, accuracyText.getText());
-        super.onSaveInstanceState(outState);
-    }
+//
+//    //causes app to freeze when clicking buildings
+//    //causes app to crash when you give location permissions
+////    @Override
+////    protected void onResume() {
+////        super.onResume();
+////        createLocationRequest();
+////        //cause of issue
+////    }
+//
+//    private void startLocationUpdates() {
+//        if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+//                != PackageManager.PERMISSION_GRANTED) {
+//            //commented about because it kept popping up repeatedly
+////            Toast.makeText(this, "I need permission to access location in order to record locations.", Toast.LENGTH_SHORT).show();
+//
+//            ActivityCompat.requestPermissions(this,
+//                    new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
+//                    MY_PERMISSIONS_REQUEST_ACCESS_FINE_LOCATION);
+//        } else {
+//            mFusedLocationClient.requestLocationUpdates(mLocationRequest,
+//                    mLocationCallback,
+//                    null /* Looper */);
+//        }
+//    }
+//
+////    @Override
+////    protected void onPause() {
+////        super.onPause();
+////        mFusedLocationClient.removeLocationUpdates(mLocationCallback);
+////    }
+//
+//    @Override
+//    protected void onSaveInstanceState(Bundle outState) {
+////        outState.putCharSequence(LATITUDE_KEY, latText.getText());
+////        outState.putCharSequence(LONGITUDE_KEY, lonText.getText());
+////        outState.putCharSequence(ACCURACY_KEY, accuracyText.getText());
+//        super.onSaveInstanceState(outState);
+//    }
 
 }
