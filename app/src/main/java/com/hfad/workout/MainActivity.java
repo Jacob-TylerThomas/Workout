@@ -22,6 +22,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.google.android.gms.common.api.ResolvableApiException;
@@ -38,8 +39,10 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 
 import java.util.Date;
+import java.util.List;
 
 import io.objectbox.Box;
+import io.objectbox.BoxStore;
 
 public class MainActivity extends AppCompatActivity {
     RecyclerView mRecyclerView;
@@ -48,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private FusedLocationProviderClient mFusedLocationClient;
     private Box<LocationRecording> locationBox;
     private LocationRecordAdapter adapter;
+    private BoxStore boxStore;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -57,6 +62,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+
 
 //        //throws a nullpointerexception error
 //        mRecyclerView = findViewById(R.id.card_view);
@@ -180,8 +186,21 @@ public class MainActivity extends AppCompatActivity {
                         @Override
                         public void onSuccess(Location location) {
                             // Got last known location. In some rare situations this can be null.
+                            Button nearBuiling = findViewById(R.id.nearestBuilding);
                             if (location != null) {
+                                boxStore = ((App)getApplication()).getBoxStore();
+                                Box<WorkoutObject> WorkoutObjectBox = boxStore.boxFor(WorkoutObject.class);
+                                List<WorkoutObject> workoutList= WorkoutObjectBox.getAll();
+                                String[] workoutImages = new String[workoutList.size()];
+                                //run a sorting algorithm on the list to be able to get the lowest distance
+                                for (int i = 0; i < workoutList.size(); i++) {
+                                    //figure out how to make a double list
+                                    workoutImages[i] = [workoutList.get(i).getLatitude(), workoutList.get(i).getLongtitude()];
+                                }
+//                                int distance = Math.sqrt(Math.pow((location.getLatitude()-buildingLat),2) + Math.pow((location.getLongitude()-buildingLon),2));
                                 //double distance = Math.sqrt(mLocationRequest, mLocationCallback);
+                                nearBuiling.setText(String.format("\n Longitude: %1$s \\n Latitude: %2$s\",",location.getLatitude(), location.getLongitude()));
+
 
                             }
                         }
