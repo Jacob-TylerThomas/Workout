@@ -41,8 +41,6 @@ public class WorkoutDetailFragment extends Fragment  {
         View view = getView();
         if (view != null) {
 
-//            String[] workoutNames = new String[workoutList.size()];
-
             title = getView().findViewById(R.id.textTitle);
             title.setText(workoutList.get((int) workoutId).getName());
 
@@ -56,13 +54,13 @@ public class WorkoutDetailFragment extends Fragment  {
             caption.setText(workoutList.get((int) workoutId).getCaption());
 
             ImageView image=getView().findViewById(R.id.building_picture);
-        image.setImageResource(getResources().getIdentifier(workoutList.get((int) workoutId).getImage(),
+            image.setImageResource(getResources().getIdentifier(workoutList.get((int) workoutId).getImage(),
                 "drawable", getActivity().getPackageName()));
 
-        TextView buildingLink = getView().findViewById(R.id.moreInformation);
-        Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
-        buildingLink.setText(R.string.More_information_text);
-        Linkify.addLinks(buildingLink, pattern, workoutList.get((int) workoutId).getLink());
+            TextView buildingLink = getView().findViewById(R.id.moreInformation);
+            Pattern pattern = Pattern.compile("visit +[a-zA-Z]+");
+            buildingLink.setText(R.string.More_information_text);
+            Linkify.addLinks(buildingLink, pattern, workoutList.get((int) workoutId).getLink());
         }
 
     }

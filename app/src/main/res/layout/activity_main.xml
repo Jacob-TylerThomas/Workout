@@ -20,7 +20,6 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <!--clicking on the button after giving permissions crashes the app-->
         <Button
             android:id="@+id/nearestBuilding"
             android:layout_width="match_parent"
@@ -34,16 +33,14 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/toolbar" />
 
-
-        <fragment xmlns:android="http://schemas.android.com/apk/res/android"
-        android:id="@+id/main_frag"
-        android:name="com.hfad.workout.WorkoutListFragment"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/nearestBuilding" />
-
+            <fragment xmlns:android="http://schemas.android.com/apk/res/android"
+            android:id="@+id/main_frag"
+            android:name="com.hfad.workout.WorkoutListFragment"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nearestBuilding" />
 
     </android.support.constraint.ConstraintLayout>
     <android.support.design.widget.NavigationView
