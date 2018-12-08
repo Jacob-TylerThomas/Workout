@@ -48,6 +48,7 @@ import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import io.objectbox.Box;
 import io.objectbox.BoxStore;
@@ -244,16 +245,19 @@ public class MainActivity extends AppCompatActivity {
                                     }
                                 }
                                 System.out.print(distances);
-                                HashMap<String, Double> map = new HashMap<String, Double>();
+                                LinkedHashMap<String, Double> map = new LinkedHashMap<>();
                                 for (long i = 0; i < workoutList.size(); i++) {
                                     for (double j = 0; j < distances.length; j++) {
                                         map.put(workoutList.get((int) i).getBuildId(),distances[(int) i]);
 
                                     }
                                 }
-                                System.out.print(map);
                                 sortByValues(map);
-                                System.out.print(map);
+                                Set maybe = map.keySet();
+                                String hope = String.valueOf(maybe.iterator().next());
+                                long closestBuilding = Long.parseLong(hope);
+                                itemClicked(closestBuilding);
+//                                String firstKey = testing.entrySet().stream().min(a,b) -> a.getValue().compareTo(b.getValue()).get().getKey();
 
                                 nearBuiling.setText(String.format("\n Longitude: %1$s \\n Latitude: %2$s\",",location.getLatitude(), location.getLongitude()));
 
