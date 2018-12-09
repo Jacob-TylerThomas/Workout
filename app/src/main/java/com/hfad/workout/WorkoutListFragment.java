@@ -49,7 +49,7 @@ public class WorkoutListFragment extends Fragment {
             CaptionedImagesAdapter adapter =
                     new CaptionedImagesAdapter(workoutNames, workoutImages);
             workoutRecycler.setAdapter(adapter);
-            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 1);
+            GridLayoutManager layoutManager = new GridLayoutManager(getActivity(), 2);
             workoutRecycler.setLayoutManager(layoutManager);
             adapter.setListener(new CaptionedImagesAdapter.Listener() {
                 public void onClick(int position) {
